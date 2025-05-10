@@ -38,9 +38,9 @@ export default function Leaderboard() {
                   <th className="py-4 px-6">#</th>
                   <th className="py-4 px-6">Username</th>
                   <th className="py-4 px-6">Aura Points</th>
-                  <th className="py-4 px-6">Win Rate</th>
-                  <th className="py-4 px-6">Avg Return</th>
-                  <th className="py-4 px-6">Twitter</th>
+                  <th className="py-4 px-6 hidden md:table-cell">Win Rate</th>
+                  <th className="py-4 px-6 hidden md:table-cell">Avg Return</th>
+                  <th className="py-4 px-6 hidden md:table-cell">Twitter</th>
                 </tr>
               </thead>
               <tbody>
@@ -64,9 +64,9 @@ export default function Leaderboard() {
                       </td>
                       <td className="py-4 px-6 font-semibold">{user.username || 'anon'}</td>
                       <td className="py-4 px-6 text-green-300 font-bold">{user.auraPoints}</td>
-                      <td className="py-4 px-6">{user.winRate}</td>
-                      <td className="py-4 px-6">{user.avgReturn}</td>
-                      <td className="py-4 px-6 text-blue-400">
+                      <td className="py-4 px-6 hidden md:table-cell">{user.winRate}</td>
+                      <td className="py-4 px-6 hidden md:table-cell">{user.avgReturn}</td>
+                      <td className="py-4 px-6 text-blue-400 hidden md:table-cell">
                         {user.twitter ? (
                           <a href={`https://x.com/${user.twitter}`} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
                             @{user.twitter}

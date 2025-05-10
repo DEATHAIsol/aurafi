@@ -32,13 +32,13 @@ export default function ClaimNFT({ userData }) {
     <div className="flex flex-col items-center justify-center h-full w-full animate-fade-in">
       <div className="w-full max-w-5xl bg-[#23272f] rounded-2xl shadow-2xl p-14 border border-[#2e323c] flex flex-col items-center">
         <h2 className="text-4xl font-extrabold mb-10 text-center text-green-300 tracking-wide">Claim Your NFT</h2>
-        <div className="flex flex-row gap-10 justify-center mb-10 w-full">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 justify-center mb-10 w-full">
           {NFTS.map((nft, i) => {
             const eligible = points >= nft.minPoints;
             return (
               <div
                 key={nft.name}
-                className={`relative w-64 h-80 bg-[#181c24] rounded-2xl overflow-hidden shadow-2xl border-4 ${nft.color} flex flex-col items-center justify-end transition-transform hover:scale-105 ${eligible ? 'ring-4 ring-green-400' : 'opacity-60'}`}
+                className={`relative w-full md:w-64 h-80 bg-[#181c24] rounded-2xl overflow-hidden shadow-2xl border-4 ${nft.color} flex flex-col items-center justify-end transition-transform hover:scale-105 ${eligible ? 'ring-4 ring-green-400' : 'opacity-60'} mb-6 md:mb-0`}
               >
                 <img
                   src={nft.img}
