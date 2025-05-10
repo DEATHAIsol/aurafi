@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Home({ onSubmit, userData, submitting }) {
-  const [wallet, setWallet] = useState('');
+export default function Home({ onSubmit, userData, submitting, connectedWallet }) {
+  const [wallet, setWallet] = useState(connectedWallet || '');
   const [username, setUsername] = useState('');
   const [twitter, setTwitter] = useState('');
   const [typing, setTyping] = useState(false);
@@ -23,6 +23,13 @@ export default function Home({ onSubmit, userData, submitting }) {
       }
     }, 3000 / fullText.length); // Spread typing over 3 seconds
   };
+
+  // Update wallet field if connectedWallet changes
+  useEffect(() => {
+    if (connectedWallet && connectedWallet !== wallet) {
+      setWallet(connectedWallet);
+    }
+  }, [connectedWallet]);
 
   return (
     <div className="flex flex-col items-center justify-center h-full w-full">

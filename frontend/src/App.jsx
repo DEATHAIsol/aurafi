@@ -4,6 +4,8 @@ import Home from './Home';
 import Leaderboard from './Leaderboard';
 import ClaimNFT from './ClaimNFT';
 import './App.css';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://aurafi.onrender.com';
 
@@ -11,6 +13,7 @@ function App() {
   const [userData, setUserData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const location = useLocation();
+  const { publicKey } = useWallet();
 
   // Home form submit handler
   const handleHomeSubmit = async (wallet, username, twitter) => {
@@ -58,7 +61,7 @@ function App() {
           </nav>
         </div>
         <div className="px-6 mt-8">
-          <button className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition">Connect Wallet</button>
+          <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition" />
         </div>
       </aside>
 
@@ -67,7 +70,7 @@ function App() {
         <div className="absolute inset-0 pointer-events-none z-0" />
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full">
           <Routes>
-            <Route path="/" element={<Home onSubmit={handleHomeSubmit} userData={userData} submitting={submitting} />} />
+            <Route path="/" element={<Home onSubmit={handleHomeSubmit} userData={userData} submitting={submitting} connectedWallet={publicKey?.toBase58() || ''} />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/claim-nft" element={<ClaimNFT userData={userData} />} />
           </Routes>

@@ -66,7 +66,13 @@ export default function Leaderboard() {
                       <td className="py-4 px-6 text-green-300 font-bold">{user.auraPoints}</td>
                       <td className="py-4 px-6">{user.winRate}</td>
                       <td className="py-4 px-6">{user.avgReturn}</td>
-                      <td className="py-4 px-6 text-blue-400">{user.twitter ? `@${user.twitter}` : ''}</td>
+                      <td className="py-4 px-6 text-blue-400">
+                        {user.twitter ? (
+                          <a href={`https://x.com/${user.twitter}`} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
+                            @{user.twitter}
+                          </a>
+                        ) : ''}
+                      </td>
                     </tr>
                   ))
                 )}
