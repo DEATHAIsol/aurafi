@@ -7,14 +7,13 @@ import App from './App.jsx'
 // Wallet Adapter imports
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
-import { PhantomWalletAdapter, SolflareWalletAdapter, GlowWalletAdapter, TorusWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { PhantomWalletAdapter, SolflareWalletAdapter, TorusWalletAdapter } from '@solana/wallet-adapter-wallets';
 import '@solana/wallet-adapter-react-ui/styles.css';
 import { clusterApiUrl } from '@solana/web3.js';
 
 const wallets = [
   new PhantomWalletAdapter(),
   new SolflareWalletAdapter(),
-  new GlowWalletAdapter(),
   new TorusWalletAdapter(),
 ];
 
