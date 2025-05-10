@@ -28,7 +28,7 @@ export default function Leaderboard() {
           <span role="img" aria-label="trophy" className="text-yellow-400 text-6xl">🏆</span>
           Leaderboard
         </h2>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full">
           {loading ? (
             <div className="text-center text-gray-400 py-8 text-2xl">Loading...</div>
           ) : (
