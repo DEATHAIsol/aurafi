@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://aurafi.onrender.com';
+
 export default function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -8,7 +10,7 @@ export default function Leaderboard() {
     const fetchLeaderboard = async () => {
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:4000/api/leaderboard');
+        const res = await fetch(`${BACKEND_URL}/api/leaderboard`);
         const data = await res.json();
         setLeaderboard(data);
       } catch (err) {

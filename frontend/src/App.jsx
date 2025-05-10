@@ -5,6 +5,8 @@ import Leaderboard from './Leaderboard';
 import ClaimNFT from './ClaimNFT';
 import './App.css';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://aurafi.onrender.com';
+
 function App() {
   const [userData, setUserData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -15,7 +17,7 @@ function App() {
     setSubmitting(true);
     setUserData(null);
     try {
-      const res = await fetch('http://localhost:4000/api/submit-wallet', {
+      const res = await fetch(`${BACKEND_URL}/api/submit-wallet`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ wallet, username, twitter }),
