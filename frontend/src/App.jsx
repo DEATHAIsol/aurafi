@@ -95,6 +95,7 @@ function App() {
             {navLink('/leaderboard', 'Leaderboard')}
             {navLink('/rewards', 'Rewards')}
             {navLink('/claim-nft', 'Claim your NFT')}
+            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-purple-400 font-semibold">Copytrade through Aurafi</a>
             <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-blue-400 font-semibold">Twitter</a>
             <div className="mt-2">
               <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition" />
@@ -127,6 +128,7 @@ function App() {
             {navLink('/leaderboard', 'Leaderboard', () => setMenuOpen(false))}
             {navLink('/rewards', 'Rewards', () => setMenuOpen(false))}
             {navLink('/claim-nft', 'Claim your NFT', () => setMenuOpen(false))}
+            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-purple-400 font-semibold" onClick={() => setMenuOpen(false)}>Copytrade through Aurafi</a>
             <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-blue-400 font-semibold" onClick={() => setMenuOpen(false)}>Twitter</a>
             <div className="mt-2">
               <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition" />
