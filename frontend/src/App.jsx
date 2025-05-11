@@ -3,6 +3,7 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './Home';
 import Leaderboard from './Leaderboard';
 import ClaimNFT from './ClaimNFT';
+import Rewards from './Rewards';
 import './App.css';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
@@ -16,7 +17,7 @@ const INFO_CONTENT = {
   },
   legal: {
     title: '⚖️ Legal Policy',
-    content: `Aura Points is a blockchain analytics platform operating in a purely observational and non-custodial capacity. It is designed for education, entertainment, and community engagement around Solana wallet activity. It does not provide brokerage services, store user funds, or facilitate trading of any financial instruments.\n\nKey legal disclaimers include:\n\n* We do **not** offer financial, legal, or tax advice\n* Metrics are **not investment recommendations** or predictions\n* Leaderboard rankings are based purely on algorithmic evaluations of past public blockchain data\n* No user should interpret rankings or Aura Points as indicative of skill, future performance, or endorsement\n* Use of this platform is at the user's own risk, and Aura Points accepts no liability for financial losses\n\nIt is the user's responsibility to comply with all local laws regarding crypto trading, taxation, and financial disclosures. Aura Points may be updated or suspended without notice, and we reserve the right to modify the platform's scoring algorithms or data processing logic to preserve fairness and accuracy.`
+    content: `Aura Points is a blockchain analytics platform operating in a purely observational and non-custodial capacity. It is designed for education, entertainment, and community engagement around Solana wallet activity. It does not provide brokerage services, store user funds, or facilitate trading of any financial instruments.\n\nKey legal disclaimers include:\n\n* We do not offer financial, legal, or tax advice\n* Metrics are not investment recommendations or predictions\n* Leaderboard rankings are based purely on algorithmic evaluations of past public blockchain data\n* No user should interpret rankings or Aura Points as indicative of skill, future performance, or endorsement\n* Use of this platform is at the user's own risk, and Aura Points accepts no liability for financial losses\n\nIt is the user's responsibility to comply with all local laws regarding crypto trading, taxation, and financial disclosures. Aura Points may be updated or suspended without notice, and we reserve the right to modify the platform's scoring algorithms or data processing logic to preserve fairness and accuracy.`
   },
   rules: {
     title: '📜 Rules Policy',
@@ -24,7 +25,7 @@ const INFO_CONTENT = {
   },
   partners: {
     title: '🤝 Our Partners',
-    content: `Aura Points thrives through the collaboration of several leading Web3 infrastructure providers and community stakeholders. These partnerships empower us to offer rich analytics and maintain the integrity of our scoring system:\n\n* **Helius** – Provides deep indexing infrastructure to track and decode Solana wallet transactions with speed and reliability.\n* **Birdeye** – Supplies token pricing history and real-time price feeds to support accurate trade valuations and ROI calculations.\n* **Jupiter Aggregator** – Enables liquidity routing data that helps us understand the context and behavior of memecoin transactions.\n* **Cointelegraph** – Supports Aura Points through media exposure and trusted crypto journalism.\n* **Dexscreener** – Offers visualization tools and trade tracking for monitoring token flow and market behavior.\n* **Pump.fun** – One of the primary platforms for launching and interacting with memecoins, which underpins the majority of our tracked activity.\n* **Axiom** – An emerging protocol focused on bringing zk-powered compute and verifiable analytics to the Solana ecosystem.\n* **Bullx** – Assists with growth strategy, smart contract safety monitoring, and infrastructure reliability.\n* **Triton RPC** – Our performance RPC provider, powering fast and scalable Solana RPC queries.\n\nWe continue to build relationships with strategic investment DAOs, Solana ecosystem builders, and token analytics platforms to increase transparency and the richness of the Aura Points experience. These partnerships are foundational to the quality, speed, and credibility of the analytics Aura Points delivers.`
+    content: `Aura Points thrives through the collaboration of several leading Web3 infrastructure providers and community stakeholders. These partnerships empower us to offer rich analytics and maintain the integrity of our scoring system:\n\n* Helius – Provides deep indexing infrastructure to track and decode Solana wallet transactions with speed and reliability.\n* Birdeye – Supplies token pricing history and real-time price feeds to support accurate trade valuations and ROI calculations.\n* Jupiter Aggregator – Enables liquidity routing data that helps us understand the context and behavior of memecoin transactions.\n* Cointelegraph – Supports Aura Points through media exposure and trusted crypto journalism.\n* Dexscreener – Offers visualization tools and trade tracking for monitoring token flow and market behavior.\n* Pump.fun – One of the primary platforms for launching and interacting with memecoins, which underpins the majority of our tracked activity.\n* Axiom – An emerging protocol focused on bringing zk-powered compute and verifiable analytics to the Solana ecosystem.\n* Bullx – Assists with growth strategy, smart contract safety monitoring, and infrastructure reliability.\n* Triton RPC – Our performance RPC provider, powering fast and scalable Solana RPC queries.\n\nWe continue to build relationships with strategic investment DAOs, Solana ecosystem builders, and token analytics platforms to increase transparency and the richness of the Aura Points experience. These partnerships are foundational to the quality, speed, and credibility of the analytics Aura Points delivers.`
   }
 };
 
@@ -92,6 +93,7 @@ function App() {
           <nav className="flex flex-col gap-4 text-lg">
             {navLink('/', 'Home')}
             {navLink('/leaderboard', 'Leaderboard')}
+            {navLink('/rewards', 'Rewards')}
             {navLink('/claim-nft', 'Claim your NFT')}
             <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-blue-400 font-semibold">Twitter</a>
             <div className="mt-2">
@@ -123,6 +125,7 @@ function App() {
           <div className="absolute top-16 right-4 bg-[#23272f] rounded-lg shadow-lg flex flex-col gap-2 py-4 px-6 w-56 animate-fade-in z-40">
             {navLink('/', 'Home', () => setMenuOpen(false))}
             {navLink('/leaderboard', 'Leaderboard', () => setMenuOpen(false))}
+            {navLink('/rewards', 'Rewards', () => setMenuOpen(false))}
             {navLink('/claim-nft', 'Claim your NFT', () => setMenuOpen(false))}
             <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-blue-400 font-semibold" onClick={() => setMenuOpen(false)}>Twitter</a>
             <div className="mt-2">
@@ -144,6 +147,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home onSubmit={handleHomeSubmit} userData={userData} submitting={submitting} connectedWallet={publicKey?.toBase58() || ''} />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/rewards" element={<Rewards />} />
             <Route path="/claim-nft" element={<ClaimNFT userData={userData} />} />
           </Routes>
         </div>
