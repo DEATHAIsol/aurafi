@@ -89,6 +89,14 @@ function App() {
     <div className="w-screen h-screen min-h-0 min-w-0 flex overflow-hidden">
       <div className="background-effect"></div>
       <svg className="background-lines" width="100%" height="100%" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#39ff14" flood-opacity="0.8" />
+          </filter>
+          <filter id="glowBold" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#7fff00" flood-opacity="1" />
+          </filter>
+        </defs>
         {/* Vertical lines */}
         <line x1="80" y1="0" x2="80" y2="900" stroke="#39ff14" strokeWidth="1.2"/>
         <line x1="180" y1="0" x2="180" y2="900" stroke="#39ff14" strokeWidth="0.7"/>
@@ -112,12 +120,12 @@ function App() {
         <line x1="0" y1="720" x2="1600" y2="720" stroke="#39ff14" strokeWidth="1.1"/>
         <line x1="0" y1="800" x2="1600" y2="800" stroke="#39ff14" strokeWidth="0.7"/>
         {/* Diagonal lines */}
-        <line x1="0" y1="0" x2="1600" y2="900" stroke="#39ff14" strokeWidth="0.7"/>
-        <line x1="0" y1="900" x2="1600" y2="0" stroke="#39ff14" strokeWidth="0.7"/>
-        <line x1="300" y1="0" x2="1300" y2="900" stroke="#39ff14" strokeWidth="0.5"/>
-        <line x1="0" y1="600" x2="1600" y2="100" stroke="#39ff14" strokeWidth="0.5"/>
-        <line x1="800" y1="0" x2="1600" y2="900" stroke="#39ff14" strokeWidth="0.5"/>
-        <line x1="0" y1="300" x2="1600" y2="700" stroke="#39ff14" strokeWidth="0.5"/>
+        <line x1="0" y1="0" x2="1600" y2="900" stroke="#39ff14" strokeWidth="1.5" filter="url(#glow)"/>
+        <line x1="0" y1="900" x2="1600" y2="0" stroke="#7fff00" strokeWidth="2.5" filter="url(#glowBold)"/>
+        <line x1="300" y1="0" x2="1300" y2="900" stroke="#39ff14" strokeWidth="2.2"/>
+        <line x1="0" y1="600" x2="1600" y2="100" stroke="#7fff00" strokeWidth="1.2" filter="url(#glow)"/>
+        <line x1="800" y1="0" x2="1600" y2="900" stroke="#39ff14" strokeWidth="2.8"/>
+        <line x1="0" y1="300" x2="1600" y2="700" stroke="#7fff00" strokeWidth="1.7"/>
         {/* Circles for extra effect */}
         <circle cx="200" cy="150" r="60" fill="#39ff14" opacity="0.12"/>
         <circle cx="1400" cy="200" r="40" fill="#39ff14" opacity="0.18"/>
@@ -160,6 +168,21 @@ function App() {
         <circle cx="600" cy="350" r="30" fill="#39ff14" opacity="0.31"/>
         <circle cx="1400" cy="300" r="40" fill="#39ff14" opacity="0.28"/>
         <circle cx="1000" cy="100" r="26" fill="#39ff14" opacity="0.36"/>
+        {/* New random diagonal lines */}
+        <line x1="100" y1="0" x2="1500" y2="900" stroke="#39ff14" strokeWidth="2.5" filter="url(#glow)"/>
+        <line x1="0" y1="200" x2="1200" y2="900" stroke="#7fff00" strokeWidth="3.2" filter="url(#glowBold)"/>
+        <line x1="400" y1="0" x2="1600" y2="800" stroke="#39ff14" strokeWidth="1.1"/>
+        <line x1="0" y1="800" x2="1200" y2="0" stroke="#7fff00" strokeWidth="2.9" filter="url(#glow)"/>
+        <line x1="200" y1="900" x2="1400" y2="0" stroke="#39ff14" strokeWidth="2.3"/>
+        <line x1="0" y1="500" x2="1600" y2="200" stroke="#7fff00" strokeWidth="1.8" filter="url(#glowBold)"/>
+        <line x1="600" y1="0" x2="1600" y2="600" stroke="#39ff14" strokeWidth="2.7"/>
+        <line x1="0" y1="100" x2="1000" y2="900" stroke="#7fff00" strokeWidth="1.3"/>
+        <line x1="100" y1="900" x2="1500" y2="0" stroke="#39ff14" strokeWidth="2.1" filter="url(#glow)"/>
+        <line x1="0" y1="400" x2="1600" y2="850" stroke="#7fff00" strokeWidth="2.6" filter="url(#glowBold)"/>
+        <line x1="800" y1="900" x2="1600" y2="100" stroke="#39ff14" strokeWidth="1.9"/>
+        <line x1="0" y1="700" x2="1200" y2="0" stroke="#7fff00" strokeWidth="2.2" filter="url(#glow)"/>
+        <line x1="400" y1="900" x2="1600" y2="200" stroke="#39ff14" strokeWidth="2.4"/>
+        <line x1="0" y1="600" x2="1000" y2="0" stroke="#7fff00" strokeWidth="1.6" filter="url(#glowBold)"/>
       </svg>
       <div className="flex-1 flex flex-col min-h-0 min-w-0 relative z-10 md:pt-[2.5rem]">
         <LeaderboardTicker />
@@ -186,7 +209,7 @@ function App() {
               <button className="info-btn" onClick={() => setInfoOpen('rules')}>Rules</button>
               <button className="info-btn" onClick={() => setInfoOpen('partners')}>Our Partners</button>
             </div>
-          </div>
+      </div>
         </aside>
         {/* Mobile Top Bar */}
         <header className="md:hidden fixed top-0 left-0 w-full bg-[#20242c] flex items-center justify-between px-4 py-3 border-b border-[#23272f] z-30">
@@ -199,7 +222,7 @@ function App() {
             <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-          </button>
+        </button>
           {/* Dropdown menu */}
           {menuOpen && (
             <div className="absolute top-16 right-4 bg-[#23272f] rounded-lg shadow-lg flex flex-col gap-2 py-4 px-6 w-56 animate-fade-in z-40">
