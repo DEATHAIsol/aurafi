@@ -89,23 +89,23 @@ function App() {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-[#20242c] flex-col justify-between items-stretch border-r border-[#23272f] pt-8 pb-8 z-20">
         <div className="flex flex-col flex-1 px-6">
-          <h1 className="text-2xl font-bold mb-10 text-green-400 tracking-wide">Aura_Fi</h1>
+          <h1 className="text-2xl font-bold mb-10 text-green-400 tracking-wide">Aura Fi</h1>
           <nav className="flex flex-col gap-4 text-lg">
             {navLink('/', 'Home')}
             {navLink('/leaderboard', 'Leaderboard')}
             {navLink('/rewards', 'Rewards')}
             {navLink('/claim-nft', 'Claim your NFT')}
-            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-purple-400 font-semibold">Copytrade through Aurafi</a>
-            <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-blue-400 font-semibold">Twitter</a>
+            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold">Copytrade through Aurafi</a>
+            <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold">Twitter</a>
             <div className="mt-2">
-              <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition" />
+              <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition button-glow" />
             </div>
           </nav>
           <div className="hidden md:flex flex-col gap-2 text-xs text-gray-400 px-6 pb-2 mt-auto">
-            <button className="hover:text-green-300 text-left" onClick={() => setInfoOpen('privacy')}>Privacy Policy</button>
-            <button className="hover:text-green-300 text-left" onClick={() => setInfoOpen('legal')}>Legal Policy</button>
-            <button className="hover:text-green-300 text-left" onClick={() => setInfoOpen('rules')}>Rules</button>
-            <button className="hover:text-green-300 text-left" onClick={() => setInfoOpen('partners')}>Our Partners</button>
+            <button className="info-btn" onClick={() => setInfoOpen('privacy')}>Privacy Policy</button>
+            <button className="info-btn" onClick={() => setInfoOpen('legal')}>Legal Policy</button>
+            <button className="info-btn" onClick={() => setInfoOpen('rules')}>Rules</button>
+            <button className="info-btn" onClick={() => setInfoOpen('partners')}>Our Partners</button>
           </div>
         </div>
       </aside>
@@ -128,16 +128,16 @@ function App() {
             {navLink('/leaderboard', 'Leaderboard', () => setMenuOpen(false))}
             {navLink('/rewards', 'Rewards', () => setMenuOpen(false))}
             {navLink('/claim-nft', 'Claim your NFT', () => setMenuOpen(false))}
-            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-purple-400 font-semibold" onClick={() => setMenuOpen(false)}>Copytrade through Aurafi</a>
-            <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded hover:bg-[#23272f] text-blue-400 font-semibold" onClick={() => setMenuOpen(false)}>Twitter</a>
+            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold" onClick={() => setMenuOpen(false)}>Copytrade through Aurafi</a>
+            <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold" onClick={() => setMenuOpen(false)}>Twitter</a>
             <div className="mt-2">
-              <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition" />
+              <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition button-glow" />
             </div>
             <div className="border-t border-[#2e323c] mt-2 pt-2 flex flex-col gap-1 text-xs text-gray-400">
-              <button className="hover:text-green-300 text-left" onClick={() => { setInfoOpen('privacy'); setMenuOpen(false); }}>Privacy Policy</button>
-              <button className="hover:text-green-300 text-left" onClick={() => { setInfoOpen('legal'); setMenuOpen(false); }}>Legal Policy</button>
-              <button className="hover:text-green-300 text-left" onClick={() => { setInfoOpen('rules'); setMenuOpen(false); }}>Rules</button>
-              <button className="hover:text-green-300 text-left" onClick={() => { setInfoOpen('partners'); setMenuOpen(false); }}>Our Partners</button>
+              <button className="info-btn" onClick={() => { setInfoOpen('privacy'); setMenuOpen(false); }}>Privacy Policy</button>
+              <button className="info-btn" onClick={() => { setInfoOpen('legal'); setMenuOpen(false); }}>Legal Policy</button>
+              <button className="info-btn" onClick={() => { setInfoOpen('rules'); setMenuOpen(false); }}>Rules</button>
+              <button className="info-btn" onClick={() => { setInfoOpen('partners'); setMenuOpen(false); }}>Our Partners</button>
             </div>
           </div>
         )}

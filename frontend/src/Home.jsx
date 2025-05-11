@@ -34,7 +34,7 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
   return (
     <div className="flex flex-col items-center justify-center h-full w-full px-2 md:px-0">
       <div className="w-full max-w-2xl bg-[#23272f] rounded-2xl shadow-2xl p-4 md:p-14 border border-[#2e323c] mb-10 animate-fade-in relative overflow-hidden mt-4 md:mt-0">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-6 md:mb-8 text-center">Get Your Aura Points</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-6 md:mb-8 text-center glow-heading">Get Your Aura Points</h2>
         {/* Typewriter effect overlay */}
         {typing && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#23272f] z-50">
@@ -46,7 +46,7 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-6">
             <input
               type="text"
-              className="bg-[#181c24] border border-[#2e323c] rounded-xl px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 text-lg md:text-xl"
+              className="bg-[#181c24] border border-[#2e323c] rounded-xl px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 text-lg md:text-xl input-glow"
               placeholder="Solana Wallet Address"
               value={wallet}
               onChange={e => setWallet(e.target.value)}
@@ -54,21 +54,21 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
             />
             <input
               type="text"
-              className="bg-[#181c24] border border-[#2e323c] rounded-xl px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 text-lg md:text-xl"
+              className="bg-[#181c24] border border-[#2e323c] rounded-xl px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 text-lg md:text-xl input-glow"
               placeholder="Username (optional)"
               value={username}
               onChange={e => setUsername(e.target.value)}
             />
             <input
               type="text"
-              className="bg-[#181c24] border border-[#2e323c] rounded-xl px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 text-lg md:text-xl"
+              className="bg-[#181c24] border border-[#2e323c] rounded-xl px-4 py-3 md:px-6 md:py-4 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 text-lg md:text-xl input-glow"
               placeholder="Twitter Handle (optional)"
               value={twitter}
               onChange={e => setTwitter(e.target.value)}
             />
             <button
               type="submit"
-              className="mt-2 md:mt-4 py-3 md:py-4 text-xl md:text-2xl bg-green-500 hover:bg-green-400 rounded-xl font-bold transition shadow-green-700/30 shadow-lg"
+              className="mt-2 md:mt-4 py-3 md:py-4 text-xl md:text-2xl bg-green-500 hover:bg-green-400 rounded-xl font-bold transition shadow-green-700/30 shadow-lg button-glow"
               disabled={submitting}
             >
               {submitting ? 'Calculating...' : 'Submit'}

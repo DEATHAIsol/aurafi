@@ -24,7 +24,7 @@ export default function Leaderboard() {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full px-1 md:px-0">
       <div className="w-full max-w-md md:max-w-5xl bg-[#23272f] rounded-2xl shadow-2xl p-2 md:p-14 border border-[#2e323c]">
-        <h2 className="text-2xl md:text-5xl font-extrabold mb-4 md:mb-10 text-center text-green-300 tracking-wide flex items-center justify-center gap-4">
+        <h2 className="text-2xl md:text-5xl font-extrabold mb-4 md:mb-10 text-center text-green-300 tracking-wide flex items-center justify-center gap-4 glow-heading">
           <span role="img" aria-label="trophy" className="text-yellow-400 text-3xl md:text-6xl">🏆</span>
           Leaderboard
         </h2>
@@ -34,7 +34,7 @@ export default function Leaderboard() {
           ) : (
             <table className="min-w-full text-left text-base md:text-xl">
               <thead>
-                <tr className="text-green-400 border-b-2 border-[#2e323c] text-lg md:text-2xl">
+                <tr className="text-green-400 border-b-2 border-[#2e323c] text-lg md:text-2xl glow-green">
                   <th className="py-2 md:py-4 px-2 md:px-6">#</th>
                   <th className="py-2 md:py-4 px-2 md:px-6">Username</th>
                   <th className="py-2 md:py-4 px-2 md:px-6">Aura Points</th>
