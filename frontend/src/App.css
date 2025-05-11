@@ -88,3 +88,31 @@ body, html, #root {
 .glow-heading {
   text-shadow: 0 0 16px #39ff14, 0 0 32px #39ff1433;
 }
+
+.background-effect {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 60% 20%, #39ff1440 0%, #23272f 60%, #181c24 100%);
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+.background-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation-name: ticker;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

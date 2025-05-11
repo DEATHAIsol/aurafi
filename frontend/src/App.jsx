@@ -7,6 +7,7 @@ import Rewards from './Rewards';
 import './App.css';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import LeaderboardTicker from './LeaderboardTicker';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://aurafi.onrender.com';
 
@@ -86,75 +87,154 @@ function App() {
 
   return (
     <div className="w-screen h-screen min-h-0 min-w-0 flex overflow-hidden">
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-[#20242c] flex-col justify-between items-stretch border-r border-[#23272f] pt-8 pb-8 z-20">
-        <div className="flex flex-col flex-1 px-6">
-          <h1 className="text-2xl font-bold mb-10 text-green-400 tracking-wide">Aura Fi</h1>
-          <nav className="flex flex-col gap-4 text-lg">
-            {navLink('/', 'Home')}
-            {navLink('/leaderboard', 'Leaderboard')}
-            {navLink('/rewards', 'Rewards')}
-            {navLink('/claim-nft', 'Claim your NFT')}
-            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold">Copytrade through Aurafi</a>
-            <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold">Twitter</a>
-            <div className="mt-2">
-              <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition button-glow" />
+      <div className="background-effect"></div>
+      <svg className="background-lines" width="100%" height="100%" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Vertical lines */}
+        <line x1="80" y1="0" x2="80" y2="900" stroke="#39ff14" strokeWidth="1.2"/>
+        <line x1="180" y1="0" x2="180" y2="900" stroke="#39ff14" strokeWidth="0.7"/>
+        <line x1="300" y1="0" x2="300" y2="900" stroke="#39ff14" strokeWidth="1.5"/>
+        <line x1="420" y1="0" x2="420" y2="900" stroke="#39ff14" strokeWidth="0.8"/>
+        <line x1="540" y1="0" x2="540" y2="900" stroke="#39ff14" strokeWidth="1.1"/>
+        <line x1="650" y1="0" x2="650" y2="900" stroke="#39ff14" strokeWidth="0.7"/>
+        <line x1="800" y1="0" x2="800" y2="900" stroke="#39ff14" strokeWidth="2"/>
+        <line x1="950" y1="0" x2="950" y2="900" stroke="#39ff14" strokeWidth="1.3"/>
+        <line x1="1100" y1="0" x2="1100" y2="900" stroke="#39ff14" strokeWidth="0.9"/>
+        <line x1="1200" y1="0" x2="1200" y2="900" stroke="#39ff14" strokeWidth="1.7"/>
+        <line x1="1350" y1="0" x2="1350" y2="900" stroke="#39ff14" strokeWidth="1.1"/>
+        <line x1="1500" y1="0" x2="1500" y2="900" stroke="#39ff14" strokeWidth="0.8"/>
+        {/* Horizontal lines */}
+        <line x1="0" y1="120" x2="1600" y2="120" stroke="#39ff14" strokeWidth="0.7"/>
+        <line x1="0" y1="200" x2="1600" y2="200" stroke="#39ff14" strokeWidth="1.2"/>
+        <line x1="0" y1="320" x2="1600" y2="320" stroke="#39ff14" strokeWidth="0.8"/>
+        <line x1="0" y1="400" x2="1600" y2="400" stroke="#39ff14" strokeWidth="1.5"/>
+        <line x1="0" y1="520" x2="1600" y2="520" stroke="#39ff14" strokeWidth="0.9"/>
+        <line x1="0" y1="600" x2="1600" y2="600" stroke="#39ff14" strokeWidth="1.7"/>
+        <line x1="0" y1="720" x2="1600" y2="720" stroke="#39ff14" strokeWidth="1.1"/>
+        <line x1="0" y1="800" x2="1600" y2="800" stroke="#39ff14" strokeWidth="0.7"/>
+        {/* Diagonal lines */}
+        <line x1="0" y1="0" x2="1600" y2="900" stroke="#39ff14" strokeWidth="0.7"/>
+        <line x1="0" y1="900" x2="1600" y2="0" stroke="#39ff14" strokeWidth="0.7"/>
+        <line x1="300" y1="0" x2="1300" y2="900" stroke="#39ff14" strokeWidth="0.5"/>
+        <line x1="0" y1="600" x2="1600" y2="100" stroke="#39ff14" strokeWidth="0.5"/>
+        <line x1="800" y1="0" x2="1600" y2="900" stroke="#39ff14" strokeWidth="0.5"/>
+        <line x1="0" y1="300" x2="1600" y2="700" stroke="#39ff14" strokeWidth="0.5"/>
+        {/* Circles for extra effect */}
+        <circle cx="200" cy="150" r="60" fill="#39ff14" opacity="0.12"/>
+        <circle cx="1400" cy="200" r="40" fill="#39ff14" opacity="0.18"/>
+        <circle cx="800" cy="700" r="90" fill="#39ff14" opacity="0.09"/>
+        <circle cx="1200" cy="600" r="50" fill="#39ff14" opacity="0.15"/>
+        <circle cx="400" cy="800" r="70" fill="#39ff14" opacity="0.10"/>
+        <circle cx="1000" cy="300" r="30" fill="#39ff14" opacity="0.22"/>
+        <circle cx="300" cy="400" r="40" fill="#39ff14" opacity="0.13"/>
+        <circle cx="1500" cy="800" r="60" fill="#39ff14" opacity="0.08"/>
+        <circle cx="600" cy="200" r="35" fill="#39ff14" opacity="0.19"/>
+        <circle cx="900" cy="100" r="55" fill="#39ff14" opacity="0.11"/>
+        <circle cx="1300" cy="700" r="45" fill="#39ff14" opacity="0.14"/>
+        <circle cx="200" cy="700" r="30" fill="#39ff14" opacity="0.20"/>
+        <circle cx="700" cy="500" r="60" fill="#39ff14" opacity="0.09"/>
+        <circle cx="1100" cy="800" r="50" fill="#39ff14" opacity="0.13"/>
+        <circle cx="500" cy="300" r="40" fill="#39ff14" opacity="0.16"/>
+        <circle cx="100" cy="500" r="35" fill="#39ff14" opacity="0.18"/>
+        <circle cx="1500" cy="100" r="55" fill="#39ff14" opacity="0.10"/>
+        <circle cx="800" cy="400" r="80" fill="#39ff14" opacity="0.07"/>
+        <circle cx="600" cy="600" r="45" fill="#39ff14" opacity="0.15"/>
+        <circle cx="400" cy="100" r="30" fill="#39ff14" opacity="0.21"/>
+        {/* Extra glowing circles */}
+        <circle cx="350" cy="250" r="38" fill="#39ff14" opacity="0.28"/>
+        <circle cx="1550" cy="400" r="22" fill="#39ff14" opacity="0.32"/>
+        <circle cx="120" cy="850" r="44" fill="#39ff14" opacity="0.25"/>
+        <circle cx="1450" cy="850" r="33" fill="#39ff14" opacity="0.29"/>
+        <circle cx="1000" cy="850" r="28" fill="#39ff14" opacity="0.31"/>
+        <circle cx="700" cy="120" r="36" fill="#39ff14" opacity="0.27"/>
+        <circle cx="1100" cy="200" r="41" fill="#39ff14" opacity="0.30"/>
+        <circle cx="300" cy="600" r="25" fill="#39ff14" opacity="0.33"/>
+        <circle cx="150" cy="350" r="32" fill="#39ff14" opacity="0.26"/>
+        <circle cx="1350" cy="100" r="39" fill="#39ff14" opacity="0.34"/>
+        <circle cx="500" cy="700" r="29" fill="#39ff14" opacity="0.28"/>
+        <circle cx="900" cy="800" r="37" fill="#39ff14" opacity="0.32"/>
+        <circle cx="1250" cy="500" r="34" fill="#39ff14" opacity="0.27"/>
+        <circle cx="400" cy="500" r="31" fill="#39ff14" opacity="0.29"/>
+        <circle cx="100" cy="100" r="27" fill="#39ff14" opacity="0.35"/>
+        <circle cx="1500" cy="600" r="42" fill="#39ff14" opacity="0.30"/>
+        <circle cx="800" cy="200" r="35" fill="#39ff14" opacity="0.33"/>
+        <circle cx="600" cy="350" r="30" fill="#39ff14" opacity="0.31"/>
+        <circle cx="1400" cy="300" r="40" fill="#39ff14" opacity="0.28"/>
+        <circle cx="1000" cy="100" r="26" fill="#39ff14" opacity="0.36"/>
+      </svg>
+      <div className="flex-1 flex flex-col min-h-0 min-w-0 relative z-10 md:pt-[2.5rem]">
+        <LeaderboardTicker />
+        {/* Desktop Sidebar */}
+        <aside className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-[#20242c] flex-col justify-between items-stretch border-r border-[#23272f] pt-8 pb-8 z-20">
+          <div className="flex flex-col flex-1 px-6">
+            <Link to="/" className="block mt-6 mb-10">
+              <h1 className="text-4xl font-bold text-green-400 tracking-wide glow-heading animate-pulse cursor-pointer">Aura Fi</h1>
+            </Link>
+            <nav className="flex flex-col gap-4 text-lg">
+              {navLink('/', 'Home')}
+              {navLink('/leaderboard', 'Leaderboard')}
+              {navLink('/rewards', 'Rewards')}
+              {navLink('/claim-nft', 'Claim your NFT')}
+              <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold">Copytrade through Aurafi</a>
+              <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold">Twitter</a>
+              <div className="mt-2">
+                <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition button-glow" />
+              </div>
+            </nav>
+            <div className="hidden md:flex flex-col gap-2 text-xs text-gray-400 px-6 pb-2 mt-auto">
+              <button className="info-btn" onClick={() => setInfoOpen('privacy')}>Privacy Policy</button>
+              <button className="info-btn" onClick={() => setInfoOpen('legal')}>Legal Policy</button>
+              <button className="info-btn" onClick={() => setInfoOpen('rules')}>Rules</button>
+              <button className="info-btn" onClick={() => setInfoOpen('partners')}>Our Partners</button>
             </div>
-          </nav>
-          <div className="hidden md:flex flex-col gap-2 text-xs text-gray-400 px-6 pb-2 mt-auto">
-            <button className="info-btn" onClick={() => setInfoOpen('privacy')}>Privacy Policy</button>
-            <button className="info-btn" onClick={() => setInfoOpen('legal')}>Legal Policy</button>
-            <button className="info-btn" onClick={() => setInfoOpen('rules')}>Rules</button>
-            <button className="info-btn" onClick={() => setInfoOpen('partners')}>Our Partners</button>
           </div>
-        </div>
-      </aside>
-      {/* Mobile Top Bar */}
-      <header className="md:hidden fixed top-0 left-0 w-full bg-[#20242c] flex items-center justify-between px-4 py-3 border-b border-[#23272f] z-30">
-        <h1 className="text-xl font-bold text-green-400 tracking-wide">Aura_Fi</h1>
-        <button
-          className="text-white focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Open menu"
-        >
-          <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        {/* Dropdown menu */}
-        {menuOpen && (
-          <div className="absolute top-16 right-4 bg-[#23272f] rounded-lg shadow-lg flex flex-col gap-2 py-4 px-6 w-56 animate-fade-in z-40">
-            {navLink('/', 'Home', () => setMenuOpen(false))}
-            {navLink('/leaderboard', 'Leaderboard', () => setMenuOpen(false))}
-            {navLink('/rewards', 'Rewards', () => setMenuOpen(false))}
-            {navLink('/claim-nft', 'Claim your NFT', () => setMenuOpen(false))}
-            <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold" onClick={() => setMenuOpen(false)}>Copytrade through Aurafi</a>
-            <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold" onClick={() => setMenuOpen(false)}>Twitter</a>
-            <div className="mt-2">
-              <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition button-glow" />
+        </aside>
+        {/* Mobile Top Bar */}
+        <header className="md:hidden fixed top-0 left-0 w-full bg-[#20242c] flex items-center justify-between px-4 py-3 border-b border-[#23272f] z-30">
+          <h1 className="text-xl font-bold text-green-400 tracking-wide">Aura_Fi</h1>
+          <button
+            className="text-white focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Open menu"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          {/* Dropdown menu */}
+          {menuOpen && (
+            <div className="absolute top-16 right-4 bg-[#23272f] rounded-lg shadow-lg flex flex-col gap-2 py-4 px-6 w-56 animate-fade-in z-40">
+              {navLink('/', 'Home', () => setMenuOpen(false))}
+              {navLink('/leaderboard', 'Leaderboard', () => setMenuOpen(false))}
+              {navLink('/rewards', 'Rewards', () => setMenuOpen(false))}
+              {navLink('/claim-nft', 'Claim your NFT', () => setMenuOpen(false))}
+              <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold" onClick={() => setMenuOpen(false)}>Copytrade through Aurafi</a>
+              <a href="https://x.com/Aura__Fi" target="_blank" rel="noopener noreferrer" className="py-2 px-3 rounded sidebar-link-white font-semibold" onClick={() => setMenuOpen(false)}>Twitter</a>
+              <div className="mt-2">
+                <WalletMultiButton className="w-full py-2 bg-green-600 hover:bg-green-500 rounded text-white font-bold transition button-glow" />
+              </div>
+              <div className="border-t border-[#2e323c] mt-2 pt-2 flex flex-col gap-1 text-xs text-gray-400">
+                <button className="info-btn" onClick={() => { setInfoOpen('privacy'); setMenuOpen(false); }}>Privacy Policy</button>
+                <button className="info-btn" onClick={() => { setInfoOpen('legal'); setMenuOpen(false); }}>Legal Policy</button>
+                <button className="info-btn" onClick={() => { setInfoOpen('rules'); setMenuOpen(false); }}>Rules</button>
+                <button className="info-btn" onClick={() => { setInfoOpen('partners'); setMenuOpen(false); }}>Our Partners</button>
+              </div>
             </div>
-            <div className="border-t border-[#2e323c] mt-2 pt-2 flex flex-col gap-1 text-xs text-gray-400">
-              <button className="info-btn" onClick={() => { setInfoOpen('privacy'); setMenuOpen(false); }}>Privacy Policy</button>
-              <button className="info-btn" onClick={() => { setInfoOpen('legal'); setMenuOpen(false); }}>Legal Policy</button>
-              <button className="info-btn" onClick={() => { setInfoOpen('rules'); setMenuOpen(false); }}>Rules</button>
-              <button className="info-btn" onClick={() => { setInfoOpen('partners'); setMenuOpen(false); }}>Our Partners</button>
-            </div>
+          )}
+        </header>
+        {/* Main Content */}
+        <main className="flex-1 h-screen min-h-0 min-w-0 md:ml-64 p-0 m-0 relative overflow-auto pt-16 md:pt-0">
+          <div className="absolute inset-0 pointer-events-none z-0" />
+          <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full">
+            <Routes>
+              <Route path="/" element={<Home onSubmit={handleHomeSubmit} userData={userData} submitting={submitting} connectedWallet={publicKey?.toBase58() || ''} />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/rewards" element={<Rewards />} />
+              <Route path="/claim-nft" element={<ClaimNFT userData={userData} />} />
+            </Routes>
           </div>
-        )}
-      </header>
-      {/* Main Content */}
-      <main className="flex-1 h-screen min-h-0 min-w-0 md:ml-64 p-0 m-0 relative overflow-auto pt-16 md:pt-0">
-        <div className="absolute inset-0 pointer-events-none z-0" />
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full">
-          <Routes>
-            <Route path="/" element={<Home onSubmit={handleHomeSubmit} userData={userData} submitting={submitting} connectedWallet={publicKey?.toBase58() || ''} />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/rewards" element={<Rewards />} />
-            <Route path="/claim-nft" element={<ClaimNFT userData={userData} />} />
-          </Routes>
-        </div>
-      </main>
-      <InfoModal open={!!infoOpen} onClose={() => setInfoOpen(null)} section={infoOpen} />
+        </main>
+        <InfoModal open={!!infoOpen} onClose={() => setInfoOpen(null)} section={infoOpen} />
+      </div>
     </div>
   );
 }
