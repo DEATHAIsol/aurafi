@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export default function Home({ onSubmit, userData, submitting, connectedWallet }) {
   const [wallet, setWallet] = useState(connectedWallet || '');
@@ -6,6 +8,8 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
   const [twitter, setTwitter] = useState('');
   const [typing, setTyping] = useState(false);
   const [typedText, setTypedText] = useState('');
+  const cardRef = useRef(null);
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +26,117 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
         setTimeout(() => setTyping(false), 1000); // Show full text for 1s
       }
     }, 3000 / fullText.length); // Spread typing over 3 seconds
+  };
+
+  const handleDownloadPDF = async () => {
+    if (!cardRef.current) return;
+    const canvas = await html2canvas(cardRef.current, { scale: 2, useCORS: true });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+    // Calculate width/height to fit A4
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pageWidth - 40; // 20pt margin each side
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const y = Math.max(40, (pageHeight - imgHeight) / 2); // Center vertically
+    pdf.addImage(imgData, 'PNG', 20, y, imgWidth, imgHeight);
+    pdf.save('aura-points-card.pdf');
+  };
+
+  const handleDownloadPNG = async () => {
+    if (!cardRef.current) return;
+    const scale = 2;
+    const borderRadius = 32 * scale; // adjust if your border radius is different
+    const neonGreen = '#22ff7e'; // neon green border color
+
+    // Render the card to a canvas
+    const cardCanvas = await html2canvas(cardRef.current, { scale, useCORS: true });
+
+    // Create a new canvas with the same size
+    const finalCanvas = document.createElement('canvas');
+    finalCanvas.width = cardCanvas.width;
+    finalCanvas.height = cardCanvas.height;
+    const ctx = finalCanvas.getContext('2d');
+
+    // Draw neon green rounded rectangle as background
+    ctx.fillStyle = neonGreen;
+    ctx.beginPath();
+    ctx.moveTo(borderRadius, 0);
+    ctx.lineTo(finalCanvas.width - borderRadius, 0);
+    ctx.quadraticCurveTo(finalCanvas.width, 0, finalCanvas.width, borderRadius);
+    ctx.lineTo(finalCanvas.width, finalCanvas.height - borderRadius);
+    ctx.quadraticCurveTo(finalCanvas.width, finalCanvas.height, finalCanvas.width - borderRadius, finalCanvas.height);
+    ctx.lineTo(borderRadius, finalCanvas.height);
+    ctx.quadraticCurveTo(0, finalCanvas.height, 0, finalCanvas.height - borderRadius);
+    ctx.lineTo(0, borderRadius);
+    ctx.quadraticCurveTo(0, 0, borderRadius, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // Clip to rounded rectangle and draw the card image
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.drawImage(cardCanvas, 0, 0);
+    ctx.restore();
+
+    // Export as PNG
+    const imgData = finalCanvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = imgData;
+    link.download = 'aura-points-card.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleCopyImage = async () => {
+    if (!cardRef.current) return;
+    const scale = 2;
+    const borderRadius = 32 * scale; // adjust if your border radius is different
+    const neonGreen = '#22ff7e'; // neon green border color
+
+    // Render the card to a canvas
+    const cardCanvas = await html2canvas(cardRef.current, { scale, useCORS: true });
+
+    // Create a new canvas with the same size
+    const finalCanvas = document.createElement('canvas');
+    finalCanvas.width = cardCanvas.width;
+    finalCanvas.height = cardCanvas.height;
+    const ctx = finalCanvas.getContext('2d');
+
+    // Draw neon green rounded rectangle as background
+    ctx.fillStyle = neonGreen;
+    ctx.beginPath();
+    ctx.moveTo(borderRadius, 0);
+    ctx.lineTo(finalCanvas.width - borderRadius, 0);
+    ctx.quadraticCurveTo(finalCanvas.width, 0, finalCanvas.width, borderRadius);
+    ctx.lineTo(finalCanvas.width, finalCanvas.height - borderRadius);
+    ctx.quadraticCurveTo(finalCanvas.width, finalCanvas.height, finalCanvas.width - borderRadius, finalCanvas.height);
+    ctx.lineTo(borderRadius, finalCanvas.height);
+    ctx.quadraticCurveTo(0, finalCanvas.height, 0, finalCanvas.height - borderRadius);
+    ctx.lineTo(0, borderRadius);
+    ctx.quadraticCurveTo(0, 0, borderRadius, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // Clip to rounded rectangle and draw the card image
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.drawImage(cardCanvas, 0, 0);
+    ctx.restore();
+
+    // Copy the final canvas as PNG to clipboard
+    finalCanvas.toBlob(async (blob) => {
+      try {
+        await navigator.clipboard.write([
+          new window.ClipboardItem({ 'image/png': blob })
+        ]);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      } catch (err) {
+        // Optionally handle error
+      }
+    }, 'image/png');
   };
 
   // Update wallet field if connectedWallet changes
@@ -77,18 +192,50 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
         )}
         {/* Show Aura Points card after submission */}
         {!typing && userData && (
-          <div className="mt-6 md:mt-10 bg-[#181c24] rounded-xl p-4 md:p-8 text-center border border-green-700 shadow-green-900/30 shadow-lg animate-glow">
-            <h3 className="text-2xl md:text-3xl font-bold text-green-400 mb-2 md:mb-4">Aura Points</h3>
-            <div className="text-4xl md:text-6xl font-extrabold text-green-300 mb-2 md:mb-4 animate-pulse">{userData.auraPoints}</div>
-            <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-10 text-lg md:text-2xl mb-2 md:mb-4">
-              <span>Win Rate: <span className="font-bold text-white">{userData.winRate}</span></span>
-              <span>Avg Return: <span className="font-bold text-white">{userData.avgReturn}</span></span>
+          <>
+            <div ref={cardRef} className="mt-6 md:mt-10 bg-[#181c24] rounded-xl p-4 md:p-8 text-center border border-green-700 shadow-green-900/30 shadow-lg animate-glow relative overflow-hidden">
+              {/* Card background image */}
+              <img
+                src="/card-bg.png"
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{ zIndex: 0 }}
+              />
+              {/* Card content */}
+              <div className="relative z-10">
+                <h3 className="text-4xl md:text-5xl font-bold text-green-400 mb-1 md:mb-2">Aura Points</h3>
+                <div className="text-6xl md:text-7xl font-extrabold text-green-300 mb-2 md:mb-4 animate-pulse">{userData.auraPoints}</div>
+                <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-10 text-sm md:text-base mb-2 md:mb-4 text-gray-200/90">
+                  <span className="text-gray-200/90">Win Rate: <span className="font-bold text-white/90">{userData.winRate}</span></span>
+                  <span className="text-gray-200/90">Avg Return: <span className="font-bold text-white/90">{userData.avgReturn}</span></span>
+                </div>
+                {/* Twitter handle first, then wallet, no username, moved down */}
+                <div className="mt-6">
+                  {userData.twitter && (
+                    <div className="text-gray-200/90 text-base md:text-lg mb-1">@{userData.twitter}</div>
+                  )}
+                  <div className="text-sm md:text-base text-gray-400">Wallet: {userData.wallet.slice(0, 4)}...{userData.wallet.slice(-4)}</div>
+                </div>
+              </div>
             </div>
-            <div className="text-base md:text-lg text-gray-400">Wallet: {userData.wallet.slice(0, 4)}...{userData.wallet.slice(-4)}</div>
-            {userData.twitter && (
-              <div className="mt-2 text-blue-400 text-base md:text-lg">@{userData.twitter}</div>
+            <div className="flex flex-col md:flex-row gap-3 md:gap-6 items-center justify-center mt-4">
+              <button
+                onClick={handleDownloadPNG}
+                className="py-3 px-8 text-lg md:text-xl bg-green-500 hover:bg-green-400 rounded-xl font-bold transition shadow-green-700/30 shadow-lg button-glow"
+              >
+                Download as PNG
+              </button>
+              <button
+                onClick={handleCopyImage}
+                className="py-3 px-8 text-lg md:text-xl bg-blue-500 hover:bg-blue-400 rounded-xl font-bold transition shadow-blue-700/30 shadow-lg button-glow"
+              >
+                Copy Image
+              </button>
+            </div>
+            {copied && (
+              <div className="text-xs text-green-400 mt-2 animate-fade-in">Copied</div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>
