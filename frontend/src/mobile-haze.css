@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+  .mobile-green-haze-bg::before,
+  .mobile-green-haze-bg::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 20% 80%, #39ff14aa 0%, #23272f 80%),
+                radial-gradient(circle at 80% 20%, #39ff14aa 0%, #23272f 80%);
+    opacity: 0.35;
+    filter: blur(24px);
+    mix-blend-mode: lighten;
+  }
+} 

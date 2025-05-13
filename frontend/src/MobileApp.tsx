@@ -4,6 +4,7 @@ import Leaderboard from './Leaderboard';
 import Rewards from './Rewards';
 import ClaimNFT from './ClaimNFT';
 import CopytradeComingSoon from './CopytradeComingSoon';
+import './mobile-haze.css';
 
 const API_URL = (import.meta as any).env.VITE_API_URL || 'https://aurafi.onrender.com';
 
@@ -102,7 +103,7 @@ export default function MobileApp({ userData, submitting, onSubmit, connectedWal
   else if (page === 'copytrade') content = <CopytradeComingSoon />;
 
   return (
-    <div className="h-screen w-full pt-16 pb-8 relative" style={{ background: '#23272f', overflow: 'visible' }}>
+    <div className="h-screen w-full pt-16 pb-8 relative mobile-green-haze-bg" style={{ background: '#23272f', overflow: 'visible' }}>
       {/* Green haze on left and right edges only, outside scrollable area */}
       <div className="absolute top-0 left-0 h-full w-16 -z-10 pointer-events-none" style={{
         background: 'radial-gradient(circle at 0% 50%, #39ff14aa 0%, #23272f 80%)',
