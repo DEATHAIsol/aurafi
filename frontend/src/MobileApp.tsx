@@ -5,6 +5,24 @@ import Rewards from './Rewards';
 import ClaimNFT from './ClaimNFT';
 import CopytradeComingSoon from './CopytradeComingSoon';
 
+const API_URL = (import.meta as any).env.VITE_API_URL || 'https://aurafi.onrender.com';
+
+interface UserData {
+  wallet: string;
+  username?: string;
+  twitter?: string;
+  winRate: number;
+  avgReturn: number;
+  auraPoints: number;
+}
+
+interface MobileAppProps {
+  userData: UserData | null;
+  submitting: boolean;
+  onSubmit: (wallet: string, username: string, twitter: string) => void;
+  connectedWallet?: string;
+}
+
 const INFO_CONTENT = {
   privacy: {
     title: '🔐 Privacy Policy',
@@ -24,7 +42,13 @@ const INFO_CONTENT = {
   }
 };
 
-function InfoModal({ open, onClose, section }) {
+interface InfoModalProps {
+  open: boolean;
+  onClose: () => void;
+  section: keyof typeof INFO_CONTENT | null;
+}
+
+function InfoModal({ open, onClose, section }: InfoModalProps) {
   if (!open || !section) return null;
   const { title, content } = INFO_CONTENT[section];
   return (
@@ -38,23 +62,23 @@ function InfoModal({ open, onClose, section }) {
   );
 }
 
-export default function MobileApp({ userData, submitting, onSubmit }) {
+export default function MobileApp({ userData, submitting, onSubmit, connectedWallet }: MobileAppProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [page, setPage] = useState('home');
-  const [infoOpen, setInfoOpen] = useState(null);
+  const [infoOpen, setInfoOpen] = useState<keyof typeof INFO_CONTENT | null>(null);
+  const [localUserData, setLocalUserData] = useState<UserData | null>(userData);
 
   let content;
-  if (page === 'home') content = <Home onSubmit={onSubmit} userData={userData} submitting={submitting} />;
+  if (page === 'home') content = <Home onSubmit={onSubmit} userData={localUserData} submitting={submitting} connectedWallet={connectedWallet} />;
   else if (page === 'leaderboard') content = <Leaderboard />;
   else if (page === 'rewards') content = <Rewards />;
-  else if (page === 'claim-nft') content = <ClaimNFT userData={userData} />;
+  else if (page === 'claim-nft') content = <ClaimNFT userData={localUserData} />;
   else if (page === 'copytrade') content = <CopytradeComingSoon />;
 
-  const handleSubmit = async (wallet, username, twitter) => {
+  const handleSubmit = async (wallet: string, username: string, twitter: string) => {
     console.log('handleSubmit called', { wallet, username, twitter });
-    const url = `${API_URL}/api/submit-wallet`;
     try {
-      const res = await fetch(url, {
+      const res = await fetch(`${API_URL}/api/submit-wallet`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,11 +88,11 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
       console.log('Backend response status:', res.status);
       const data = await res.json();
       console.log('Backend response data:', data);
-      setUserData(data);
+      setLocalUserData(data);
       console.log('userData set:', data);
     } catch (err) {
       console.error('Backend error:', err);
-      setUserData(null);
+      setLocalUserData(null);
       alert('Failed to submit wallet. Please try again.');
     }
   };
