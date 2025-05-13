@@ -3,21 +3,21 @@ import { useState } from 'react';
 const NFTS = [
   {
     name: 'Bronze',
-    img: '/placeholder.jpg',
+    img: '/bronze.jpg',
     minPoints: 0,
     color: 'border-amber-700',
     label: 'Bronze NFT',
   },
   {
     name: 'Silver',
-    img: '/placeholder.jpg',
+    img: '/silver.jpg',
     minPoints: 600,
     color: 'border-gray-400',
     label: 'Silver NFT',
   },
   {
     name: 'Gold',
-    img: '/placeholder.jpg',
+    img: '/gold.jpg',
     minPoints: 1200,
     color: 'border-yellow-400',
     label: 'Gold NFT',
@@ -38,22 +38,22 @@ export default function ClaimNFT({ userData }) {
             return (
               <div
                 key={nft.name}
-                className={`relative w-full md:w-64 h-80 bg-[#181c24] rounded-2xl overflow-hidden shadow-2xl border-4 ${nft.color} flex flex-col items-center justify-end transition-transform hover:scale-105 ${eligible ? 'ring-4 ring-green-400' : 'opacity-60'} mb-6 md:mb-0`}
+                className={`relative w-full md:w-64 aspect-square bg-[#181c24] rounded-2xl overflow-hidden shadow-2xl border-4 ${nft.color} flex flex-col items-stretch justify-end transition-transform hover:scale-105 ${eligible ? 'ring-4 ring-green-400' : 'opacity-60'} mb-6 md:mb-0`}
               >
-                <img
-                  src={nft.img}
-                  alt={nft.label}
-                  className="w-full h-56 object-cover animate-nft-spin"
-                />
-                <div className="absolute top-2 left-2 bg-black/60 px-3 py-1 rounded-full text-xs font-bold text-white uppercase tracking-widest">
-                  {nft.name}
+                <div className="relative w-full flex-1">
+                  <img
+                    src={nft.img}
+                    alt={nft.label}
+                    className="w-full h-full object-cover absolute inset-0"
+                    style={{ aspectRatio: '1 / 1' }}
+                  />
+                  <div className="absolute top-2 left-2 bg-black/60 px-3 py-1 rounded-full text-xs font-bold text-white uppercase tracking-widest z-10">
+                    {nft.name}
+                  </div>
                 </div>
                 <div className="w-full text-center py-3 text-lg font-bold text-green-200 bg-gradient-to-t from-green-900/80 to-transparent">
                   {nft.label}
                 </div>
-                {eligible && (
-                  <div className="absolute bottom-4 left-0 right-0 text-center text-green-400 font-bold animate-pulse text-xl">You Qualify!</div>
-                )}
               </div>
             );
           })}

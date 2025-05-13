@@ -49,16 +49,15 @@ body, html, #root {
 
 .glow-green {
   color: #39ff14;
-  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
+  text-shadow: 0 0 4px #39ff14, 0 0 8px #39ff14;
 }
 
 .input-glow {
   color: #39ff14;
-  text-shadow: 0 0 6px #39ff14;
 }
 
 .button-glow {
-  box-shadow: 0 0 12px 2px #39ff14, 0 0 24px 4px #39ff1433;
+  box-shadow: 0 0 6px 1px #39ff14, 0 0 12px 2px #39ff1433;
 }
 
 .info-btn {
@@ -86,7 +85,7 @@ body, html, #root {
 }
 
 .glow-heading {
-  text-shadow: 0 0 16px #39ff14, 0 0 32px #39ff1433;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff1433;
 }
 
 .background-effect {
