@@ -12,7 +12,7 @@ import LeaderboardTicker from './LeaderboardTicker';
 import { isMobile } from 'react-device-detect';
 import MobileApp from './MobileApp';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://aurafi.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://aurafi.onrender.com';
 
 const INFO_CONTENT = {
   privacy: {
@@ -60,13 +60,13 @@ function App() {
 
   // Home form submit handler
   const handleHomeSubmit = async (wallet, username, twitter) => {
-    setSubmitting(true);
-    setUserData(null);
     console.log('handleHomeSubmit called', { wallet, username, twitter });
     try {
-      const res = await fetch(`${BACKEND_URL}/api/submit-wallet`, {
+      const res = await fetch(`${API_URL}/api/submit-wallet`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ wallet, username, twitter }),
       });
       console.log('Backend response status:', res.status);
@@ -75,10 +75,10 @@ function App() {
       setUserData(data);
       console.log('userData set:', data);
     } catch (err) {
-      setUserData(null);
       console.error('Backend error:', err);
+      setUserData(null);
+      alert('Failed to submit wallet. Please try again.');
     }
-    setSubmitting(false);
   };
 
   // Sidebar link helper

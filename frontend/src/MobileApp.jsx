@@ -50,6 +50,28 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
   else if (page === 'claim-nft') content = <ClaimNFT userData={userData} />;
   else if (page === 'copytrade') content = <CopytradeComingSoon />;
 
+  const handleSubmit = async (wallet, username, twitter) => {
+    console.log('handleSubmit called', { wallet, username, twitter });
+    try {
+      const res = await fetch(`${API_URL}/api/submit-wallet`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ wallet, username, twitter }),
+      });
+      console.log('Backend response status:', res.status);
+      const data = await res.json();
+      console.log('Backend response data:', data);
+      setUserData(data);
+      console.log('userData set:', data);
+    } catch (err) {
+      console.error('Backend error:', err);
+      setUserData(null);
+      alert('Failed to submit wallet. Please try again.');
+    }
+  };
+
   return (
     <div className="h-screen w-full pt-16 pb-8 relative" style={{ background: '#23272f', overflow: 'visible' }}>
       {/* Green haze on left and right edges only, outside scrollable area */}
