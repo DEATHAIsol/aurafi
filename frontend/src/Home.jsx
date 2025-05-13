@@ -66,8 +66,11 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
     finalCanvas.height = cardCanvas.height;
     const ctx = finalCanvas.getContext('2d');
 
-    // Draw neon green rounded rectangle as background
+    // Fill the background with neon green to avoid white corners
     ctx.fillStyle = neonGreen;
+    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+
+    // Draw neon green rounded rectangle as background
     ctx.beginPath();
     ctx.moveTo(borderRadius, 0);
     ctx.lineTo(finalCanvas.width - borderRadius, 0);
@@ -112,8 +115,11 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
     finalCanvas.height = cardCanvas.height;
     const ctx = finalCanvas.getContext('2d');
 
-    // Draw neon green rounded rectangle as background
+    // Fill the background with neon green to avoid white corners
     ctx.fillStyle = neonGreen;
+    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height);
+
+    // Draw neon green rounded rectangle as background
     ctx.beginPath();
     ctx.moveTo(borderRadius, 0);
     ctx.lineTo(finalCanvas.width - borderRadius, 0);
@@ -133,7 +139,7 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
     ctx.drawImage(cardCanvas, 0, 0);
     ctx.restore();
 
-    // Copy the final canvas as PNG to clipboard
+    // Copy the final canvas as PNG to clipboard or download
     finalCanvas.toBlob(async (blob) => {
       try {
         if (navigator.clipboard && navigator.clipboard.write) {
