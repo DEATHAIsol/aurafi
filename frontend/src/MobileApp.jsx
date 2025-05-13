@@ -29,7 +29,7 @@ function InfoModal({ open, onClose, section }) {
   const { title, content } = INFO_CONTENT[section];
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-[#2e323c] rounded-xl shadow-2xl p-4 max-w-md w-full mx-2 text-xs text-gray-200 relative">
+      <div className="bg-[#23272f] rounded-xl shadow-2xl p-4 max-w-md w-full mx-2 text-xs text-gray-200 relative">
         <button onClick={onClose} className="absolute top-2 right-2 text-gray-400 hover:text-white text-lg">✕</button>
         <h3 className="font-bold text-base mb-2 text-green-300">{title}</h3>
         <pre className="whitespace-pre-wrap font-sans text-xs">{content}</pre>
@@ -52,6 +52,12 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
 
   return (
     <div className="h-screen w-full pt-16 pb-8 relative overflow-y-auto" style={{ background: '#23272f' }}>
+      {/* Green haze background */}
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse at 50% 30%, #39ff1440 0%, #23272f 70%, #181c24 100%)',
+        filter: 'blur(8px)',
+        opacity: 0.7
+      }} />
       {/* Header */}
       <header className="fixed top-0 left-0 w-full h-14 z-30 flex items-center justify-between px-4" style={{ background: '#181B23', maxWidth: '100vw' }}>
         <span className="font-bold" style={{ color: '#50FA7B', fontSize: 24, fontFamily: 'Inter, monospace, sans-serif', letterSpacing: '0.02em' }}>AuraFi</span>
@@ -82,7 +88,7 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
         )}
       </header>
       {/* Main Content */}
-      <div className="w-full max-w-md mx-auto px-4 bg-[#2e323c] rounded-2xl shadow-2xl p-8 border border-[#2e323c] mb-4 mt-4 flex flex-col items-center">
+      <div className="w-full max-w-md mx-auto px-4 bg-[#23272f] rounded-2xl shadow-2xl p-8 border border-[#2e323c] mb-4 mt-4 flex flex-col items-center">
         {content}
       </div>
       <InfoModal open={!!infoOpen} onClose={() => setInfoOpen(null)} section={infoOpen} />
