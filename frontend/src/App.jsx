@@ -9,6 +9,8 @@ import './App.css';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import LeaderboardTicker from './LeaderboardTicker';
+import { isMobile } from 'react-device-detect';
+import MobileApp from './MobileApp';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://aurafi.onrender.com';
 
@@ -46,6 +48,9 @@ function InfoModal({ open, onClose, section }) {
 }
 
 function App() {
+  if (isMobile) {
+    return <MobileApp />;
+  }
   const [userData, setUserData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const location = useLocation();
