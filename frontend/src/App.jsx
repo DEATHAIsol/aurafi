@@ -62,16 +62,21 @@ function App() {
   const handleHomeSubmit = async (wallet, username, twitter) => {
     setSubmitting(true);
     setUserData(null);
+    console.log('handleHomeSubmit called', { wallet, username, twitter });
     try {
       const res = await fetch(`${BACKEND_URL}/api/submit-wallet`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ wallet, username, twitter }),
       });
+      console.log('Backend response status:', res.status);
       const data = await res.json();
+      console.log('Backend response data:', data);
       setUserData(data);
+      console.log('userData set:', data);
     } catch (err) {
       setUserData(null);
+      console.error('Backend error:', err);
     }
     setSubmitting(false);
   };
