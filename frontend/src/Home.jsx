@@ -13,19 +13,27 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTyping(true);
-    setTypedText('');
-    onSubmit(wallet, username, twitter);
-    const fullText = 'CALCULATING AURA';
-    let i = 0;
-    const interval = setInterval(() => {
-      setTypedText(fullText.slice(0, i + 1));
-      i++;
-      if (i === fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => setTyping(false), 1000); // Show full text for 1s
-      }
-    }, 3000 / fullText.length); // Spread typing over 3 seconds
+    console.log('handleSubmit called', { wallet, username, twitter }); // Log for iPhone debug
+    const isIphone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isIphone) {
+      setTyping(false);
+      setTypedText('');
+      onSubmit(wallet, username, twitter);
+    } else {
+      setTyping(true);
+      setTypedText('');
+      onSubmit(wallet, username, twitter);
+      const fullText = 'CALCULATING AURA';
+      let i = 0;
+      const interval = setInterval(() => {
+        setTypedText(fullText.slice(0, i + 1));
+        i++;
+        if (i === fullText.length) {
+          clearInterval(interval);
+          setTimeout(() => setTyping(false), 1000); // Show full text for 1s
+        }
+      }, 3000 / fullText.length); // Spread typing over 3 seconds
+    }
   };
 
   const handleDownloadPDF = async () => {
