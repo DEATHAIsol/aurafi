@@ -51,8 +51,8 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
   else if (page === 'copytrade') content = <CopytradeComingSoon />;
 
   return (
-    <div className="h-screen w-full pt-16 pb-8 relative overflow-y-auto" style={{ background: '#23272f' }}>
-      {/* Green haze on left and right edges only */}
+    <div className="h-screen w-full pt-16 pb-8 relative" style={{ background: '#23272f', overflow: 'visible' }}>
+      {/* Green haze on left and right edges only, outside scrollable area */}
       <div className="absolute top-0 left-0 h-full w-16 -z-10 pointer-events-none" style={{
         background: 'radial-gradient(circle at 0% 50%, #39ff14aa 0%, #23272f 80%)',
         filter: 'blur(12px)',
@@ -92,8 +92,8 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
           </div>
         )}
       </header>
-      {/* Main Content */}
-      <div className="w-full max-w-md mx-auto px-4 bg-[#23272f] rounded-2xl shadow-2xl p-8 border border-[#2e323c] mb-4 mt-4 flex flex-col items-center">
+      {/* Main Content (scrollable) */}
+      <div className="w-full max-w-md mx-auto px-4 bg-[#23272f] rounded-2xl shadow-2xl p-8 border border-[#2e323c] mb-4 mt-4 flex flex-col items-center overflow-y-auto" style={{ maxHeight: 'calc(100vh - 5rem)' }}>
         {content}
       </div>
       <InfoModal open={!!infoOpen} onClose={() => setInfoOpen(null)} section={infoOpen} />
