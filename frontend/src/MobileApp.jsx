@@ -52,8 +52,10 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
 
   const handleSubmit = async (wallet, username, twitter) => {
     console.log('handleSubmit called', { wallet, username, twitter });
+    const isIPhone = /iPhone/i.test(navigator.userAgent);
+    const url = isIPhone ? `${API_URL}/api/submit-wallet` : `${BACKEND_URL}/api/submit-wallet`;
     try {
-      const res = await fetch(`${API_URL}/api/submit-wallet`, {
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
