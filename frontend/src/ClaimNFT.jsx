@@ -3,21 +3,21 @@ import { useState } from 'react';
 const NFTS = [
   {
     name: 'Bronze',
-    img: 'https://placekitten.com/400/400',
+    img: '/placeholder.jpg',
     minPoints: 0,
     color: 'border-amber-700',
     label: 'Bronze NFT',
   },
   {
     name: 'Silver',
-    img: 'https://placekitten.com/401/400',
+    img: '/placeholder.jpg',
     minPoints: 600,
     color: 'border-gray-400',
     label: 'Silver NFT',
   },
   {
     name: 'Gold',
-    img: 'https://placekitten.com/402/400',
+    img: '/placeholder.jpg',
     minPoints: 1200,
     color: 'border-yellow-400',
     label: 'Gold NFT',
