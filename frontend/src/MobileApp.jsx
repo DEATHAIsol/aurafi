@@ -53,7 +53,7 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
   return (
     <div className="h-screen w-full pt-16 pb-8 relative overflow-y-auto" style={{ background: '#23272f' }}>
       {/* Green haze background */}
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
+      <div className="absolute inset-0 -z-10 pointer-events-none" style={{
         background: 'radial-gradient(ellipse at 50% 30%, #39ff1440 0%, #23272f 70%, #181c24 100%)',
         filter: 'blur(8px)',
         opacity: 0.7
