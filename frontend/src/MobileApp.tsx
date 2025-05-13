@@ -67,16 +67,11 @@ export default function MobileApp({ userData, submitting, onSubmit, connectedWal
   const [page, setPage] = useState('home');
   const [infoOpen, setInfoOpen] = useState<keyof typeof INFO_CONTENT | null>(null);
   const [localUserData, setLocalUserData] = useState<UserData | null>(userData);
-
-  let content;
-  if (page === 'home') content = <Home onSubmit={onSubmit} userData={localUserData} submitting={submitting} connectedWallet={connectedWallet} />;
-  else if (page === 'leaderboard') content = <Leaderboard />;
-  else if (page === 'rewards') content = <Rewards />;
-  else if (page === 'claim-nft') content = <ClaimNFT userData={localUserData} />;
-  else if (page === 'copytrade') content = <CopytradeComingSoon />;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (wallet: string, username: string, twitter: string) => {
     console.log('handleSubmit called', { wallet, username, twitter });
+    setIsSubmitting(true);
     try {
       const res = await fetch(`${API_URL}/api/submit-wallet`, {
         method: 'POST',
@@ -94,8 +89,17 @@ export default function MobileApp({ userData, submitting, onSubmit, connectedWal
       console.error('Backend error:', err);
       setLocalUserData(null);
       alert('Failed to submit wallet. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  let content;
+  if (page === 'home') content = <Home onSubmit={handleSubmit} userData={localUserData} submitting={isSubmitting} connectedWallet={connectedWallet} />;
+  else if (page === 'leaderboard') content = <Leaderboard />;
+  else if (page === 'rewards') content = <Rewards />;
+  else if (page === 'claim-nft') content = <ClaimNFT userData={localUserData} />;
+  else if (page === 'copytrade') content = <CopytradeComingSoon />;
 
   return (
     <div className="h-screen w-full pt-16 pb-8 relative" style={{ background: '#23272f', overflow: 'visible' }}>
