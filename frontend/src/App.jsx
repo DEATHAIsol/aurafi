@@ -48,9 +48,6 @@ function InfoModal({ open, onClose, section }) {
 }
 
 function App() {
-  if (isMobile) {
-    return <MobileApp />;
-  }
   const [userData, setUserData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const location = useLocation();
