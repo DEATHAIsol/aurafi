@@ -136,13 +136,26 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
     // Copy the final canvas as PNG to clipboard
     finalCanvas.toBlob(async (blob) => {
       try {
-        await navigator.clipboard.write([
-          new window.ClipboardItem({ 'image/png': blob })
-        ]);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
+        if (navigator.clipboard && navigator.clipboard.write) {
+          await navigator.clipboard.write([
+            new window.ClipboardItem({ 'image/png': blob })
+          ]);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        } else {
+          // Fallback for older browsers
+          const imgData = finalCanvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = imgData;
+          link.download = 'aura-points-card.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          alert('Image copied to clipboard not supported. Image downloaded instead.');
+        }
       } catch (err) {
-        // Optionally handle error
+        console.error('Error copying image:', err);
+        alert('Failed to copy image. Please try again.');
       }
     }, 'image/png');
   };
@@ -209,6 +222,8 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 style={{ zIndex: 0 }}
               />
+              {/* Green haze overlay */}
+              <div className="absolute inset-0 bg-green-500/20 pointer-events-none" style={{ zIndex: 1 }} />
               {/* Card content */}
               <div className="relative z-10">
                 <h3 className="text-4xl md:text-5xl font-bold text-green-400 mb-1 md:mb-2">Aura Points</h3>
