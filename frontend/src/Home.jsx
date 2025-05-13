@@ -167,6 +167,8 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
     }
   }, [connectedWallet]);
 
+  const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
   return (
     <div className="flex flex-col items-center justify-center h-full w-full px-2 md:px-0">
       <div className="w-full max-w-2xl bg-[#23272f] rounded-2xl shadow-2xl p-4 md:p-14 border border-[#2e323c] mb-10 animate-fade-in relative overflow-hidden mt-4 md:mt-0">
@@ -222,8 +224,6 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 style={{ zIndex: 0 }}
               />
-              {/* Green haze overlay */}
-              <div className="absolute inset-0 bg-green-500/20 pointer-events-none" style={{ zIndex: 1 }} />
               {/* Card content */}
               <div className="relative z-10">
                 <h3 className="text-4xl md:text-5xl font-bold text-green-400 mb-1 md:mb-2">Aura Points</h3>
@@ -248,12 +248,14 @@ export default function Home({ onSubmit, userData, submitting, connectedWallet }
               >
                 Download as PNG
               </button>
-              <button
-                onClick={handleCopyImage}
-                className="py-3 px-8 text-lg md:text-xl bg-blue-500 hover:bg-blue-400 rounded-xl font-bold transition shadow-blue-700/30 shadow-lg button-glow"
-              >
-                Copy Image
-              </button>
+              {!isMobile && (
+                <button
+                  onClick={handleCopyImage}
+                  className="py-3 px-8 text-lg md:text-xl bg-blue-500 hover:bg-blue-400 rounded-xl font-bold transition shadow-blue-700/30 shadow-lg button-glow"
+                >
+                  Copy Image
+                </button>
+              )}
             </div>
             {copied && (
               <div className="text-xs text-green-400 mt-2 animate-fade-in">Copied</div>
