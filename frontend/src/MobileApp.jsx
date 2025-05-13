@@ -52,11 +52,16 @@ export default function MobileApp({ userData, submitting, onSubmit }) {
 
   return (
     <div className="h-screen w-full pt-16 pb-8 relative overflow-y-auto" style={{ background: '#23272f' }}>
-      {/* Green haze background */}
-      <div className="absolute inset-0 -z-10 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at 50% 30%, #39ff1440 0%, #23272f 70%, #181c24 100%)',
-        filter: 'blur(8px)',
-        opacity: 0.7
+      {/* Green haze on left and right edges only */}
+      <div className="absolute top-0 left-0 h-full w-16 -z-10 pointer-events-none" style={{
+        background: 'radial-gradient(circle at 0% 50%, #39ff14aa 0%, #23272f 80%)',
+        filter: 'blur(12px)',
+        opacity: 0.5
+      }} />
+      <div className="absolute top-0 right-0 h-full w-16 -z-10 pointer-events-none" style={{
+        background: 'radial-gradient(circle at 100% 50%, #39ff14aa 0%, #23272f 80%)',
+        filter: 'blur(12px)',
+        opacity: 0.5
       }} />
       {/* Header */}
       <header className="fixed top-0 left-0 w-full h-14 z-30 flex items-center justify-between px-4" style={{ background: '#181B23', maxWidth: '100vw' }}>
