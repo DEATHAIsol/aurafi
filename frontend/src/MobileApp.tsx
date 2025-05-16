@@ -136,12 +136,20 @@ export default function MobileApp({ userData, submitting, onSubmit, connectedWal
             <button className="text-green-400 font-bold text-lg text-left" onClick={() => { setPage('rewards'); setMenuOpen(false); }}>Rewards</button>
             <button className="text-green-400 font-bold text-lg text-left" onClick={() => { setPage('claim-nft'); setMenuOpen(false); }}>Claim NFT</button>
             <button className="text-green-400 font-bold text-lg text-left" onClick={() => { setPage('copytrade'); setMenuOpen(false); }}>Copytrade</button>
+            <a
+              href="https://x.com/Aura__Fi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-400 font-bold text-lg text-left px-0 py-0"
+              style={{ textAlign: 'left' }}
+            >
+              Twitter
+            </a>
             <hr className="my-2 border-green-900" />
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('privacy'); setMenuOpen(false); }}>Privacy Policy</button>
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('legal'); setMenuOpen(false); }}>Legal Policy</button>
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('rules'); setMenuOpen(false); }}>Rules</button>
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('partners'); setMenuOpen(false); }}>Our Partners</button>
-            <a href="https://twitter.com/AuraFi_xyz" target="_blank" rel="noopener noreferrer" className="text-blue-400 text-left font-bold text-lg hover:underline">Twitter</a>
           </div>
         )}
       </header>
