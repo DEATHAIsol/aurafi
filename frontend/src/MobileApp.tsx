@@ -141,6 +141,7 @@ export default function MobileApp({ userData, submitting, onSubmit, connectedWal
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('legal'); setMenuOpen(false); }}>Legal Policy</button>
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('rules'); setMenuOpen(false); }}>Rules</button>
             <button className="text-gray-300 text-left" onClick={() => { setInfoOpen('partners'); setMenuOpen(false); }}>Our Partners</button>
+            <a href="https://twitter.com/AuraFi_xyz" target="_blank" rel="noopener noreferrer" className="text-blue-400 text-left font-bold text-lg hover:underline">Twitter</a>
           </div>
         )}
       </header>
